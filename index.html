@@ -51,7 +51,43 @@ body{
 .subtitle{
   font-size:14px;
   opacity:.85;
-  margin-bottom:24px;
+  margin-bottom:14px;
+}
+
+/* Darshan Timing */
+.darshan-box{
+  background:#fff3e8;
+  border:1px solid #f0d2b8;
+  padding:12px;
+  border-radius:14px;
+  margin:12px 0 10px;
+  font-size:15px;
+  font-weight:600;
+  color:#7a0000;
+}
+
+/* LED Marquee */
+.marquee{
+  background:#111;
+  border-radius:12px;
+  padding:8px 0;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.marquee span{
+  display:inline-block;
+  white-space:nowrap;
+  padding-left:100%;
+  animation:scroll 22s linear infinite;
+  font-size:14px;
+  color:#00ff66;
+  font-weight:600;
+}
+
+@keyframes scroll{
+  from{transform:translateX(0);}
+  to{transform:translateX(-100%);}
 }
 
 /* Buttons */
@@ -151,7 +187,23 @@ body{
 
     <div class="logo">🙏</div>
     <div class="title">Shri Dwarkesh Darshan Haveli<br>(Nallasopara)</div>
-    <div class="subtitle">Official Daily Darshan Platform</div>
+    <div class="subtitle">Shri Charitabal Trust</div>
+
+    <div class="darshan-box">
+      🕉️ દર્શન સમય
+    </div>
+
+    <div class="marquee">
+      <span>
+        🕉️ દર્શન સમય • 
+        મંગળા દર્શન 7:30 | 
+        શૃંગાર / પલના દર્શન 10:30 | 
+        રાજભોગ 11:30 | 
+        ઉત્થાપન સાંજે 5:00 | 
+        ભોગઆરતી સાંજે 5:30 | 
+        શયન દર્શન 7:00 🙏
+      </span>
+    </div>
 
     <a class="link whatsapp" href="https://whatsapp.com/channel/0029Va9k53gDOQIW66KJAr18" target="_blank">
       <i class="fa-brands fa-whatsapp"></i> WhatsApp Channel
@@ -161,7 +213,7 @@ body{
       <i class="fa-brands fa-facebook-f"></i> Facebook Page
     </a>
 
-    <a class="link youtube" href="https://youtube.com/@shridwarkeshdarshanhaveli?si=NYAij-Ii9nzufRa9" target="_blank">
+    <a class="link youtube" href="https://youtube.com/@shridwarkeshdarshanhaveli" target="_blank">
       <i class="fa-brands fa-youtube"></i> YouTube Channel
     </a>
 
