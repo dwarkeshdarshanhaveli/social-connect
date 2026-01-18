@@ -11,7 +11,6 @@
 <style>
 :root{
   --primary:#7a0000;
-  --secondary:#cfa24a;
   --bg:#fffaf5;
 }
 
@@ -43,10 +42,7 @@ body{
 }
 
 /* Header */
-.logo{
-  font-size:34px;
-  margin-bottom:6px;
-}
+.logo{font-size:34px;margin-bottom:6px;}
 .title{
   font-size:22px;
   font-weight:600;
@@ -75,7 +71,7 @@ body{
   color:#3b2b1f;
   box-shadow:0 8px 20px rgba(0,0,0,.08);
   transition:.25s ease;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .link i{
@@ -102,7 +98,7 @@ body{
   left:50%;
   width:0;
   height:0;
-  background:rgba(0,0,0,0.15);
+  background:rgba(0,0,0,.15);
   border-radius:50%;
   transform:translate(-50%,-50%);
   transition:width .4s ease, height .4s ease, opacity .6s;
@@ -116,7 +112,7 @@ body{
   transition:0s;
 }
 
-/* Platform accents */
+/* Platform styles */
 .whatsapp{border-left:6px solid #25D366;}
 .facebook{border-left:6px solid #1877F2;}
 .youtube{border-left:6px solid #FF0000;}
@@ -127,22 +123,21 @@ body{
 .youtube i{color:#FF0000;}
 .instagram i{color:#E1306C;}
 
-/* Footer */
-.footer{
-  margin-top:18px;
-  font-size:13px;
-  opacity:.75;
-}
-
-/* Visitor Counter */
+/* Counter */
 .counter{
-  margin-top:10px;
+  margin-top:12px;
   font-size:14px;
   font-weight:500;
   color:#7a0000;
 }
 
-/* Mobile */
+/* Footer */
+.footer{
+  margin-top:16px;
+  font-size:13px;
+  opacity:.75;
+}
+
 @media(max-width:380px){
   .title{font-size:20px;}
   .link{font-size:16px;}
@@ -159,28 +154,23 @@ body{
     <div class="subtitle">Official Daily Darshan Platform</div>
 
     <a class="link whatsapp" href="https://whatsapp.com/channel/0029Va9k53gDOQIW66KJAr18" target="_blank">
-      <i class="fa-brands fa-whatsapp"></i>
-      WhatsApp Channel
+      <i class="fa-brands fa-whatsapp"></i> WhatsApp Channel
     </a>
 
     <a class="link facebook" href="https://www.facebook.com/share/1FGPGEyZDW/" target="_blank">
-      <i class="fa-brands fa-facebook-f"></i>
-      Facebook Page
+      <i class="fa-brands fa-facebook-f"></i> Facebook Page
     </a>
 
     <a class="link youtube" href="https://youtube.com/@shridwarkeshdarshanhaveli?si=NYAij-Ii9nzufRa9" target="_blank">
-      <i class="fa-brands fa-youtube"></i>
-      YouTube Channel
+      <i class="fa-brands fa-youtube"></i> YouTube Channel
     </a>
 
     <a class="link instagram" href="https://www.instagram.com/shridwarkeshdarshanhaveli" target="_blank">
-      <i class="fa-brands fa-instagram"></i>
-      Instagram Page
+      <i class="fa-brands fa-instagram"></i> Instagram Page
     </a>
 
-    <!-- Visitor Counter -->
     <div class="counter">
-      👥 Total Visitors: <span id="visitCount">Loading...</span>
+      👥 Total Visitors: <span id="visitCount">—</span>
     </div>
 
     <div class="footer">
@@ -190,16 +180,35 @@ body{
   </div>
 </div>
 
-<!-- Visitor Counter Script -->
+<!-- Visitor Counter : Same user 하루માં 1 count -->
 <script>
-fetch('https://api.countapi.xyz/hit/dwarkesh-haveli/visits')
-  .then(res => res.json())
-  .then(res => {
-    document.getElementById('visitCount').innerText = res.value;
-  })
-  .catch(() => {
-    document.getElementById('visitCount').innerText = '—';
-  });
+const namespace = 'dwarkeshdarshanhaveli';
+const key = 'social-connect-visits';
+
+const today = new Date().toISOString().split('T')[0];
+const lastVisit = localStorage.getItem('dwarkesh_last_visit');
+
+function updateCounter(hit){
+  const url = hit
+    ? `https://api.countapi.xyz/hit/${namespace}/${key}`
+    : `https://api.countapi.xyz/get/${namespace}/${key}`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('visitCount').innerText = data.value;
+    })
+    .catch(() => {
+      document.getElementById('visitCount').innerText = '—';
+    });
+}
+
+if(lastVisit !== today){
+  localStorage.setItem('dwarkesh_last_visit', today);
+  updateCounter(true);
+}else{
+  updateCounter(false);
+}
 </script>
 
 </body>
